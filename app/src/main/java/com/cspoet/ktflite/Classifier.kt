@@ -8,7 +8,6 @@ import java.io.BufferedReader
 import java.io.FileInputStream
 import java.io.IOException
 import java.io.InputStreamReader
-import java.lang.Float
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.MappedByteBuffer
@@ -99,7 +98,7 @@ class Classifier(
 
         val pq = PriorityQueue(
                 MAX_RESULTS,
-                Comparator<IClassifier.Recognition> { (_, _, confidence1), (_, _, confidence2) -> Float.compare(confidence1, confidence2) })
+                Comparator<IClassifier.Recognition> { (_, _, confidence1), (_, _, confidence2) -> confidence1.compareTo(confidence2) })
 
         for (i in labelList.indices) {
             val confidence = (labelProbArray[0][i].toInt() and 0xff) / 255.0f
